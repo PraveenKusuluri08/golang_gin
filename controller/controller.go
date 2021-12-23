@@ -65,3 +65,32 @@ func UpdateTodo(c *gin.Context) {
 
 	c.JSON(200, gin.H{"Msg": msg, "todos": todos})
 }
+
+func deleteTodo(id string) string {
+
+	for i, todo := range todos {
+		if todo.Id == id {
+			todos = append(todos[:i], todos[i+1:]...)
+			return "Todo deleted successfully"
+		}
+	}
+	return ""
+}
+
+func DeleteTodo(c *gin.Context) {
+	id := c.Params.ByName("id")
+	msg := deleteTodo(id)
+
+	c.JSON(200, gin.H{"Message": msg})
+}
+
+func deleteAllTodos() string {
+	todos = todos[:0]
+	return "All Todos are deleted"
+}
+
+func DeleteAll(c *gin.Context) {
+	msg := deleteAllTodos()
+
+	c.JSON(200, gin.H{"Message": msg})
+}

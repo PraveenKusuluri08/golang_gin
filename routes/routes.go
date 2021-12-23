@@ -12,6 +12,8 @@ func TodoGetRoute() *gin.Engine {
 		v.GET("todos", controller.GetAllTodos)
 		v.POST("todo", controller.CreateTodo)
 		v.PUT("todo/:id", controller.UpdateTodo)
+		v.DELETE("todo/:id", controller.DeleteTodo)
+		v.DELETE("todo", controller.DeleteTodo)
 	}
 
 	return r
